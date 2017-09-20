@@ -15,6 +15,9 @@
 			dataType:"json",
 			success: function(response){
         		window.location.href="Home/Index/index";
+      		},
+      		error:function(response){
+      			alert("系统错误");
       		}
       	});
 	}
