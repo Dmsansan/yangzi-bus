@@ -23,7 +23,7 @@
 	}
 </script>
 <body>
-	用户名：<input type="text" name="username" id="username">
+	用户名3131：<input type="text" name="username" id="username">
 	密码：<input type="password" name="password" id="password">
 	<input type="submit" name="dosubmit" id="submit" onclick="login()">
 </body>
