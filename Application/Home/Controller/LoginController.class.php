@@ -3,11 +3,29 @@ namespace Home\Controller;
 use Think\Controller;
 class LoginController extends Controller {
     public function index(){
-        //$this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px }</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>[ 您现在访问的是Home模块的Index控制器 ]</div><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
 		$this->display();
 	}
+
 	public function login(){
-         session('userid',123123);
-         echo json_encode(array('userid'=>"121"));
+         $admin_name = trim(I('admin_name'));
+         $password = trim(I('password'));
+         if($admin_name == '' || $password == ''){
+            $data = array('status'=>error,'data'=>array('msg'=>'参数错误！'));
+         }else{
+         	$where = array('admin_name'=>$admin_name);
+         	$res = M('admins')->where($where)->find();
+         	if($res){
+         		$password_two = $res['password'];
+         		if($password == $password_two){
+         			$data = array('status'=>success,'data'=>array('admin_id'=>$res['admin_id']));
+         		}else{
+         			$data = array('status'=>error,'data'=>array('msg'=>'密码错误！'));
+         		}
+         	}else{
+         		$data = array('status'=>error,'data'=>arrar('msg'=>'用户不存在！'));
+         	} 
+         }
+         echo json_encode($data);
 	}
+
 }

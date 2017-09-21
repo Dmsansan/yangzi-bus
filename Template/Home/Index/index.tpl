@@ -1,1 +1,2 @@
-111111
+<?php
+echo json_encode(array('status'=>success,'data'=>1));

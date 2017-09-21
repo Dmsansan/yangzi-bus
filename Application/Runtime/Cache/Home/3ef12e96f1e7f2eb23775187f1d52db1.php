@@ -1,1 +1,1 @@
-<?php if (!defined('THINK_PATH')) exit();?>111111
+<?php if (!defined('THINK_PATH')) exit(); echo json_encode(array('status'=>success,'data'=>1));
