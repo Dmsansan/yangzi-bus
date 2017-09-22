@@ -25,7 +25,7 @@ class AdminController extends Controller {
 		$first_page = $page_count*($real_page-1);
 		$last_page = $page_count*($real_page);
 
-		$order="ORDER BY `admin_id` DESC";
+		$order="`admin_id` DESC";
 		$res = M('admins')->where($where)->limit($first_page,$last_page)->order($order)->select();
         
         if($res){
@@ -88,6 +88,24 @@ class AdminController extends Controller {
             	}
             }
 		}
+		echo json_encode($data);
+	}
+
+	public function deleteAdmin(){
+		$admin_id = trim(I('admin_id'));
+
+		if(!empty($admin_id)){
+			$where = array('admin_id'=>$admin_id);
+			$res = M('admins')->where($where)->delete();
+			if($res){
+				$data = array('status'=>success,'msg'=>'用户删除成功！');
+			}else{
+				$data = array('status'=>error,'msg'=>'用户删除失败！');
+			}
+		}else{
+			$data = array('status'=>error,'msg'=>'参数传递错误！');
+		}
+
 		echo json_encode($data);
 	}
 
